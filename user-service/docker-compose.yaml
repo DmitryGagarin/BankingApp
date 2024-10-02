@@ -1,25 +1,26 @@
-version: '3'
+version: '3.8'
 
 services:
   postgres:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_DB: Bank
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: qrrqrr
+      POSTGRES_DB: ${POSTGRESDB_DATABASE}
+      POSTGRES_USER: ${POSTGRESDB_USER}
+      POSTGRES_PASSWORD: ${POSTGRESDB_ROOT_PASSWORD}
     ports:
-      - "5432:5432"
+      - "${POSTGRESDB_LOCAL_PORT}:${POSTGRESDB_DOCKER_PORT}"
+
   app:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     restart: always
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql//postgres:5432/Bank
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: qrrqrr
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:${POSTGRESDB_DOCKER_PORT}/${POSTGRESDB_DATABASE}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRESDB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRESDB_ROOT_PASSWORD}
     ports:
-      - "8081:8081"
+      - "${SPRING_LOCAL_PORT}:8081"
     depends_on:
       - postgres
