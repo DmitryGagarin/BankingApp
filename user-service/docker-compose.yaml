@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: Bank
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qrrqrr
+    ports:
+      - "5432:5432"
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql//postgres:5432/Bank
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: qrrqrr
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
