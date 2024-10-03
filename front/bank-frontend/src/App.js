@@ -5,6 +5,7 @@ const App = () => {
   return (
     <div>
       <h1>Registration Page</h1>
+      {/* Here I draw Component Registeration */}
       <Registration />
     </div>
   );

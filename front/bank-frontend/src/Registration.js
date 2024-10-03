@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 
+// Component called Registration. 
+// Can be considered as a class with methods inside 
 const Registration = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
+  const [formData, setFormData] = useState({ 
+    // names of input fields
+    // it creates object formData with these fields
+    firstName: '', // formData.firstName
+    lastName: '',  // formData.lastName
+    email: '',     // formData.email
+    password: '',  // formData.password
     confirmPassword: '',
   });
 
+  // creates object "errors" that will be filled with fields
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // validation form (basicaly cheking if empty)
   const validateForm = () => {
     const newErrors = {};
     if (!formData.firstName) newErrors.firstName = 'First name is required.';
@@ -28,9 +34,10 @@ const Registration = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // handles submit button action
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
+    if (validateForm()) { // if everything is okay, just fill values into url
       console.log('Registration Successful', formData);
       fetch(`http://localhost:8081/register/${formData.firstName}/${formData.lastName}/${formData.email}/${formData.password}`, {
         method: 'POST',
@@ -40,27 +47,32 @@ const Registration = () => {
         },
         body: JSON.stringify(formData), // We might not use this part as we're sending as URL parameters
     })
+    // error handling connected to network
     .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
     })
+    // if data is exist, we can move to another screen
     .then(data => {
         console.log('Registration Successful:', data);
         // Redirect or update UI after successful registration
     })
+    // if no connection to backend
     .catch((error) => {
         console.error('Error during registration:', error);
+        alert("No connection to backend")
         // Handle error appropriately (e.g., show error message)
     });
     }
   };
 
+  // return statement - what will be drawn after calling this component
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>First Name</label>
+        <label>First Name: </label>
         <input
           type="text"
           name="firstName"
@@ -71,7 +83,7 @@ const Registration = () => {
       </div>
 
       <div>
-        <label>Last Name</label>
+        <label>Last Name:</label>
         <input
           type="text"
           name="lastName"
@@ -82,7 +94,7 @@ const Registration = () => {
       </div>
 
       <div>
-        <label>Email</label>
+        <label>Email:</label>
         <input
           type="email"
           name="email"
@@ -93,7 +105,7 @@ const Registration = () => {
       </div>
 
       <div>
-        <label>Password</label>
+        <label>Password:</label>
         <input
           type="password"
           name="password"
@@ -104,7 +116,7 @@ const Registration = () => {
       </div>
 
       <div>
-        <label>Confirm Password</label>
+        <label>Confirm Password:</label>
         <input
           type="password"
           name="confirmPassword"
