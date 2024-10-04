@@ -1,0 +1,34 @@
+version: '3.8' # defines the schema version for the file format
+
+services: # abstract definition of a computing resource within an application
+  postgres: # name of service (container) 
+    image: postgres:latest # image of service that fill be started in container. docker gives image of postgres.
+    restart: always # always restart container is it stops
+    environment: # creating environment variables
+      POSTGRES_DB: Bank # name of database
+      POSTGRES_USER: postgres # name of user
+      POSTGRES_PASSWORD: qrrqrr # password
+    ports: # define ports on which service will work
+      - "5433:5432" # 5433 is port system, 5432 port for container
+
+  backend: # Spring backend service (this is a name of container)
+    build: # tells how to build service
+      context: ./user-service # we find folder with the name user-service
+      dockerfile: Dockerfile # we find dockerfile in this folder and collecting service as described
+    restart: always # always restart if crashed
+    environment: # creating environment variables
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/Bank # define path to the database
+      SPRING_DATASOURCE_USERNAME: postgres # define username 
+      SPRING_DATASOURCE_PASSWORD: qrrqrr # define password
+    ports: # define ports where the service will work
+      - "8081:8081" # firstly goes port of the system, then the port of container
+
+  frontend:  # React frontend service (name of container)
+    build: # specifies the way of building
+      context: ./front/bank-frontend # find the certain folder 
+      dockerfile: Dockerfile # find dockerfile there
+    restart: always # always restarts when container is crashed
+    ports: # defines ports
+      - "3000:80"  # Assuming nginx is serving on port 80
+    environment:
+      - REACT_APP_API_URL=http://backend:8081  # Use backend service name

@@ -42,28 +42,39 @@ const Registration = () => {
       fetch(`http://localhost:8081/register/${formData.firstName}/${formData.lastName}/${formData.email}/${formData.password}`, {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData), // We might not use this part as we're sending as URL parameters
-    })
+        body: JSON.stringify(formData),
+      })
     // error handling connected to network
     .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text(); // Use .text() to get raw response
+    })
+    .then(text => {
+      console.log('Response text:', text); // Log the raw response text
+      try {
+        const data = JSON.parse(text); // Attempt to parse the text to JSON
+        alert("everything ok");
+        console.log('Registration Successful:', data);
+      } catch (parseError) {
+        console.error('JSON Parse error:', parseError);
+        alert("Received unexpected response from the server.");
+      }
     })
     // if data is exist, we can move to another screen
     .then(data => {
+        alert("everything ok")
         console.log('Registration Successful:', data);
         // Redirect or update UI after successful registration
     })
     // if no connection to backend
     .catch((error) => {
-        console.error('Error during registration:', error);
-        alert("No connection to backend")
-        // Handle error appropriately (e.g., show error message)
+      console.error('Error during registration:', error);
+      alert("No connection to backend");
     });
     }
   };

@@ -1,3 +1,0 @@
-# FROM node:18-alpine
-# WORKDIR /bank-frontend
-# COPY package.json package-lock.json ./

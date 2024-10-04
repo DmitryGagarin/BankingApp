@@ -9,6 +9,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 // docker build -t bank/user-service-container .
 // docker run -p 8082:8082 bank/user-service-container
+
+// docker-compose build
+// docker-compose up
 public class UserServiceApplication {
 
 	public static void main(String[] args) {
