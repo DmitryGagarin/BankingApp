@@ -1,13 +1,20 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Registration from './Registration';
+import Authentication from './Authentication';
+import Home from './Home';
+import NavBar from './NavBar';
 
 const App = () => {
   return (
-    <div>
-      <h1>Registration Page</h1>
-      {/* Here I draw Component Registeration */}
-      <Registration />
-    </div>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/login" element={<Authentication />} />
+      </Routes>
+    </Router>
   );
 };
 

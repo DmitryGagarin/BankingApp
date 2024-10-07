@@ -6,6 +6,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ public class User {
     private String surname;
     private String email;
     private String password;
+    private LocalDateTime registeredDate;
 
     public User(String name, String surname, String email, String password) {
         this.id = UUID.randomUUID();
@@ -29,6 +31,7 @@ public class User {
         this.surname = surname;
         this.email = email;
         this.password = password;
+        this.registeredDate = LocalDateTime.now();
     }
 
     @Override
