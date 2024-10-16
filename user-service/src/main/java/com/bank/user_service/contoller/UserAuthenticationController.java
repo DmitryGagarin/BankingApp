@@ -19,7 +19,7 @@ public class UserAuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("auth/{email}/{password}")
+    @PostMapping("login/{email}/{password}")
     public ResponseEntity<?> authentication(@PathVariable String email, @PathVariable String password) {
 
         Logger logger = LoggerFactory.getLogger(UserAuthenticationController.class);

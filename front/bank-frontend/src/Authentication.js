@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // Component called Registration. 
 // Can be considered as a class with methods inside 
-const Registration = () => {
+const Authentication = () => {
     const [formData, setFormData] = useState({
         // names of input fields
         // it creates object formData with these fields
@@ -52,7 +52,7 @@ const Registration = () => {
                     try {
                         const data = JSON.parse(text); // Attempt to parse the text to JSON
                         alert("everything ok");
-                        console.log('Registration Successful:', data);
+                        console.log('auth Successful:', data);
                     } catch (parseError) {
                         console.error('JSON Parse error:', parseError);
                         alert("Received unexpected response from the server.");
@@ -61,12 +61,12 @@ const Registration = () => {
                 // if data is exist, we can move to another screen
                 .then(data => {
                     alert("everything ok")
-                    console.log('Registration Successful:', data);
+                    console.log('Auth Successful:', data);
                     // Redirect or update UI after successful registration
                 })
                 // if no connection to backend
                 .catch((error) => {
-                    console.error('Error during registration:', error);
+                    console.error('Error during auth:', error);
                     alert("No connection to backend");
                 });
         }
@@ -106,4 +106,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default Authentication;
