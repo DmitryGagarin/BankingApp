@@ -19,3 +19,5 @@ docker network create pgnetwork
 docker run --name my-pgadmin --network bankingapp_pgnetwork -p 8085:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin -d dpage/pgadmin4
 
 docker-compose exec postgres psql -U postgres -d Bank (docker-compose exec <service> psql -U <username> -d <db name>)
+
+http://localhost:8081/swagger-ui/index.html
