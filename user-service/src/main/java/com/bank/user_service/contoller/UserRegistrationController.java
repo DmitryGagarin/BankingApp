@@ -43,11 +43,11 @@ public class UserRegistrationController {
         logger.info("User registration process started for {}", email);
 
         // Check if the email already exists
-        if (userService.checkIfEmailExists(email)) {
-            logger.warn("Registration attempt failed: email {} already exists", email);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Email already exists.");
-        }
+//        if (userService.checkIfEmailExists(email)) {
+//            logger.warn("Registration attempt failed: email {} already exists", email);
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//                    .body("Email already exists.");
+//        }
 
         // Create and save the new user
         User user = new User(firstName, lastName, email, password);

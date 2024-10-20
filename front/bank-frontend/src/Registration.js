@@ -1,26 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
-// Component called Registration. 
-// Can be considered as a class with methods inside 
+// Component called Registration
 const Registration = () => {
   const [formData, setFormData] = useState({
-    // names of input fields
-    // it creates object formData with these fields
-    firstName: '', // formData.firstName
-    lastName: '',  // formData.lastName
-    email: '',     // formData.email
-    password: '',  // formData.password
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
     confirmPassword: '',
   });
 
-  // creates object "errors" that will be filled with fields
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // validation form (basicaly cheking if empty)
   const validateForm = () => {
     const newErrors = {};
     if (!formData.firstName) newErrors.firstName = 'First name is required.';
@@ -34,10 +31,9 @@ const Registration = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // handles submit button action
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) { // if everything is okay, just fill values into url
+    if (validateForm()) {
       console.log('Registration Successful', formData);
       fetch(`http://localhost:8081/register/${formData.firstName}/${formData.lastName}/${formData.email}/${formData.password}`, {
         method: 'POST',
@@ -47,39 +43,33 @@ const Registration = () => {
         },
         body: JSON.stringify(formData),
       })
-        // error handling connected to network
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
-          return response.text(); // Use .text() to get raw response
+          return response.text();
         })
         .then(text => {
           console.log('Response text:', text); // Log the raw response text
           try {
-            const data = JSON.parse(text); // Attempt to parse the text to JSON
+            const data = JSON.parse(text);
             alert("everything ok");
             console.log('Registration Successful:', data);
           } catch (parseError) {
-            console.error('JSON Parse error:', parseError);
-            alert("Received unexpected response from the server.");
+            console.log('Received plain text response:', text);
+            alert(text); // Alert the plain text message
           }
+          // Navigate after successful registration
+          navigate('/login');
         })
-        // if data is exist, we can move to another screen
-        .then(data => {
-          alert("everything ok")
-          console.log('Registration Successful:', data);
-          // Redirect or update UI after successful registration
-        })
-        // if no connection to backend
         .catch((error) => {
           console.error('Error during registration:', error);
           alert("No connection to backend");
         });
     }
   };
+  
 
-  // return statement - what will be drawn after calling this component
   return (
     <>
       <h1>Registration Page</h1>

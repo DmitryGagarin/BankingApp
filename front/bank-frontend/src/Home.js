@@ -6,9 +6,7 @@ const Home = () => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Welcome to Our App</h1>
-      <button onClick={() => navigate('/registration')}>Go to Registration</button>
-      <button onClick={() => navigate('/login')}>Go to Login</button>
+      <h2>Your home page</h2>
     </div>
   );
 };

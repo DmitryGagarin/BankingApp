@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 
 // docker build -t bank/user-service-container .
 // docker run -p 8082:8082 bank/user-service-container
