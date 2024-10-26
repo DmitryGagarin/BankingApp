@@ -11,17 +11,28 @@ services: # abstract definition of a computing resource within an application
     ports: # define ports on which service will work
       - "5433:5432" # 5433 is port system, 5432 port for container
 
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8085:81"
+
   backend: # Spring backend service (this is a name of container)
-    build: # tells how to build service
-      context: ./user-service # we find folder with the name user-service
-      dockerfile: Dockerfile # we find dockerfile in this folder and collecting service as described
-    restart: always # always restart if crashed
-    environment: # creating environment variables
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/Bank # define path to the database
-      SPRING_DATASOURCE_USERNAME: postgres # define username 
-      SPRING_DATASOURCE_PASSWORD: qrrqrr # define password
-    ports: # define ports where the service will work
-      - "8081:8081" # firstly goes port of the system, then the port of container
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/Bank
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: qrrqrr
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
 
   frontend:  # React frontend service (name of container)
     build: # specifies the way of building

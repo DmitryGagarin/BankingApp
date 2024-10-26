@@ -8,7 +8,7 @@ port 8085 - pg4admin online in docker
 
 commands:
 
-docker-compose up --build 
+docker-compose up --build (two dashes) 
 
 docker-compose stop 
 

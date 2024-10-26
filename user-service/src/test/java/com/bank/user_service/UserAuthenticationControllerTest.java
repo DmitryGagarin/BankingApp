@@ -37,10 +37,9 @@ public class UserAuthenticationControllerTest {
 
         when(userRepository.findByEmail(Mockito.anyString())).thenReturn(user);
 
-        mockMvc.perform(post("/auth/{email}/{password}", email, password)
+        mockMvc.perform(post("/login/{email}/{password}", email, password)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string("User authenticated successfully."));
     }
-
 }

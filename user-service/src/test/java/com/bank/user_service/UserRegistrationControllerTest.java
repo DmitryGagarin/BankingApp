@@ -33,14 +33,12 @@ public class UserRegistrationControllerTest {
         String email = "john.doe@example.com";
         String password = "password123";
 
-        // Mock the behavior of userRepository
         when(userRepository.save(Mockito.any(User.class)))
                 .thenReturn(new User(firstName, lastName, email, password));
 
         mockMvc.perform(post("/register/{firstName}/{lastName}/{email}/{password}", firstName, lastName, email, password)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().string("User registered successfully."));
     }
-
 }
