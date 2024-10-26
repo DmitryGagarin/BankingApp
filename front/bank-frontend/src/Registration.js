@@ -68,6 +68,10 @@ const Registration = () => {
         });
     }
   };
+
+  const moveToLogin = () => {
+    navigate("/login");
+  }
   
 
   return (
@@ -131,6 +135,10 @@ const Registration = () => {
 
         <button type="submit">Register</button>
       </form>
+      <br></br>
+      <div>
+        <button onClick={moveToLogin}>Already have account</button>
+      </div>
     </>
   );
 };

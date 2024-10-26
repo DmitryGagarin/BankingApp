@@ -34,6 +34,11 @@ public class User {
         this.registeredDate = LocalDateTime.now();
     }
 
+    public User(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

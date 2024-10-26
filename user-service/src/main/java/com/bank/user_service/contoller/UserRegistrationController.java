@@ -26,9 +26,10 @@ public class UserRegistrationController {
     @Autowired
     public UserRepository userRepository;
 
+    private UserService userService;
+
     private static final Logger logger = LoggerFactory.getLogger(UserRegistrationController.class);
 
-    private UserService userService;
 
     @Operation(
             summary = "Registers user",
@@ -42,7 +43,7 @@ public class UserRegistrationController {
 
         logger.info("User registration process started for {}", email);
 
-        // Check if the email already exists
+//         Check if the email already exists
 //        if (userService.checkIfEmailExists(email)) {
 //            logger.warn("Registration attempt failed: email {} already exists", email);
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST)

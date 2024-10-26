@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "UserAuthenticationController", description = "Allows user to login")
 @RestController
@@ -20,6 +17,8 @@ public class UserAuthenticationController {
 
     @Autowired
     private UserRepository userRepository;
+
+    protected static User currentUser = null;
 
     @PostMapping("login/{email}/{password}")
     public ResponseEntity<?> authentication(@PathVariable String email, @PathVariable String password) {
@@ -30,6 +29,7 @@ public class UserAuthenticationController {
         try {
             logger.info("UserAuthenticationController attempt to find a user");
             User user = userRepository.findByEmail(email);
+            currentUser = user;
             try {
                 logger.info("UserAuthenticationController attempt to check password started");
                 if (user != null) {

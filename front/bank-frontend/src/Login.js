@@ -48,12 +48,12 @@ const Login = () => {
                     const data = JSON.parse(text);
                     alert("Login successful");
                     console.log('Auth Successful:', data);
-                    navigate('/home');
+                    navigate('/home');                
                 } catch (parseError) {
                     // If parsing fails, handle it as a plain text response
                     console.log('Received plain text response:', text);
                     alert(text); // Alert the plain text message
-                    navigate('/home');
+                    navigate('/home');                
                 }
             })
             .catch((error) => {
@@ -62,6 +62,10 @@ const Login = () => {
             });
         }
     };
+
+    const redirectToRegistration = () => {
+        navigate('/registration'); 
+    }
 
     return (
         <>
@@ -91,6 +95,10 @@ const Login = () => {
 
                 <button type="submit">Login</button>
             </form>
+            <br></br>
+            <h2>
+                <button type="submit" name='Already_registered' onClick={redirectToRegistration}>Create Account</button>
+            </h2>
         </>
     );
 };
