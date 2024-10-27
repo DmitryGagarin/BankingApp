@@ -12,6 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 // docker-compose build
 // docker-compose up
+// docker-compose up --build
 public class UserServiceApplication {
 
 	public static void main(String[] args) {

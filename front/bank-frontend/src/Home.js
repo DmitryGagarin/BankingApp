@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
+    const [deposits, setDeposits] = useState('');
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,8 +24,27 @@ const Home = () => {
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
+    useEffect(() => {
+      fetch('http://localhost:8083/home')
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              return response.json();
+          })
+          .then(data => {
+              console.log(data); // Log the response
+              setDeposits(data.deposits);
+          })
+          .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
     const leaveAccount = () => {
       navigate('/login'); 
+    }
+
+    const createDeposit = () => {
+      navigate('/create_deposit')
     }
 
     return (
@@ -35,7 +56,10 @@ const Home = () => {
           <h3>{name} {surname}!</h3>
         </div>
         <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-          <button onClick={leaveAccount}>Leve Account</button>
+          <button onClick={leaveAccount}>Leave Account</button>
+        </div>
+        <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+          <button onClick={createDeposit}>Create Deposit</button>
         </div>
       </>
     );

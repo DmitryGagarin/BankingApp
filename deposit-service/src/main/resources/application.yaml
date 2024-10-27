@@ -1,14 +1,10 @@
 spring:
   application:
-    name: user-service
-    # name: ${SPRING_APPLICATION_NAME}
+    name: deposit-service
   datasource:
     url: jdbc:postgresql://localhost:5432/Bank
-    # url: ${SPRING_DATASOURCE_URL}
     username: postgres
-    # username: ${SPRING_DATASOURCE_USERNAME}
     password: qrrqrr
-    # password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     properties:
       hibernate:
@@ -19,12 +15,10 @@ spring:
     ansi: enabled
 
 server:
-  port: 8081
-  # port: ${SPRING_LOCAL_PORT_LOCAL}
+  port: 8083
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
-
 

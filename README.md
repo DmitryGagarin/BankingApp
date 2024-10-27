@@ -3,6 +3,8 @@ port 8761 - eureka
 port 8082 - user-service (in docker)
 port 8081 - user-service (in local)
 
+port 8083 - deposit-service
+
 port 8085 - pg4admin online in docker
 
 

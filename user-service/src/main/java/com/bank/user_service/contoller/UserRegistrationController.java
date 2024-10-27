@@ -2,7 +2,6 @@ package com.bank.user_service.contoller;
 
 import com.bank.user_service.model.User;
 import com.bank.user_service.repository.UserRepository;
-import com.bank.user_service.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
@@ -21,15 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserRegistrationController {
 
     // подсунуть мок-объекты для тестирования
-// кафку можно
-// цепочка ответсвенности для редиса
+    // кафку можно
+    // цепочка ответсвенности для редиса
     @Autowired
     public UserRepository userRepository;
 
-    private UserService userService;
-
     private static final Logger logger = LoggerFactory.getLogger(UserRegistrationController.class);
-
 
     @Operation(
             summary = "Registers user",
