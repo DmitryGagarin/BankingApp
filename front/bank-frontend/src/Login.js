@@ -69,15 +69,17 @@ const Login = () => {
 
     return (
         <>
-            <h1>Login Page</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <main style={{ backgroundColor: "pink", display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", flexDirection: "column" }}>
+            <h1 style={{ marginBottom: "20px" }}>Login Page</h1>
+            <form style={{ display: "flex", flexDirection: "column", width: "300px" }} onSubmit={handleSubmit}>
+                <div style={{ marginBottom: "15px" }}>
                     <label>Email:</label>
                     <input
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        style={{ borderRadius: "25px", padding: "10px", width: "100%" }}
                     />
                     {errors.email && <p>{errors.email}</p>}
                 </div>
@@ -89,16 +91,18 @@ const Login = () => {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
+                        style={{ borderRadius: "25px", padding: "10px", width: "100%" }}
                     />
                     {errors.password && <p>{errors.password}</p>}
                 </div>
 
-                <button type="submit">Login</button>
+                <button type="submit" style={{ borderRadius: "25px", padding: "10px", marginTop: "10px" }}>Login</button>
             </form>
             <br></br>
             <h2>
-                <button type="submit" name='Already_registered' onClick={redirectToRegistration}>Create Account</button>
+                <button type="submit" style={{ borderRadius: "25px", padding: "10px", marginTop: "10px" }} onClick={redirectToRegistration}>Create Account</button>
             </h2>
+            </main>
         </>
     );
 };

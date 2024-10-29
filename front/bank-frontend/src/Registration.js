@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import './Registration.css';
 
 // Component called Registration
 const Registration = () => {
@@ -72,73 +73,80 @@ const Registration = () => {
   const moveToLogin = () => {
     navigate("/login");
   }
-  
+
 
   return (
     <>
-      <h1>Registration Page</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>First Name: </label>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-          />
-          {errors.firstName && <p>{errors.firstName}</p>}
-        </div>
+      <main style={{ backgroundColor: "pink", display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", flexDirection: "column" }}>
+        <h1 style={{ marginBottom: "20px" }}>Registration Page</h1>
+        <form style={{ display: "flex", flexDirection: "column", width: "300px" }} onSubmit={handleSubmit}>
+          <div style={{ marginBottom: "15px" }}>
+            <label>First Name: </label>
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              style={{ borderRadius: "25px", padding: "10px", width: "100%" }}
+            />
+            {errors.firstName && <p className='error'>{errors.firstName}</p>}
+          </div>
 
-        <div>
-          <label>Last Name:</label>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-          />
-          {errors.lastName && <p>{errors.lastName}</p>}
-        </div>
+          <div style={{ marginBottom: "15px" }}>
+            <label>Last Name:</label>
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              style={{ borderRadius: "25px", padding: "10px", width: "100%" }}
+            />
+            {errors.lastName && <p className='error'>{errors.lastName}</p>}
+          </div>
 
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          {errors.email && <p>{errors.email}</p>}
-        </div>
+          <div style={{ marginBottom: "15px" }}>
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              style={{ borderRadius: "25px", padding: "10px", width: "100%" }}
+            />
+            {errors.email && <p className='error'>{errors.email}</p>}
+          </div>
 
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          {errors.password && <p>{errors.password}</p>}
-        </div>
+          <div style={{ marginBottom: "15px" }}>
+            <label>Password:</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              style={{ borderRadius: "25px", padding: "10px", width: "100%" }}
+            />
+            {errors.password && <p className='error'>{errors.password}</p>}
+          </div>
 
-        <div>
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-          />
-          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        </div>
+          <div style={{ marginBottom: "15px" }}>
+            <label>Confirm Password:</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              style={{ borderRadius: "25px", padding: "10px", width: "100%" }}
+            />
+            {errors.confirmPassword && <p className='error'>{errors.confirmPassword}</p>}
+          </div>
 
-        <button type="submit">Register</button>
-      </form>
-      <br></br>
-      <div>
-        <button onClick={moveToLogin}>Already have account</button>
-      </div>
+          <button type="submit" style={{ borderRadius: "25px", padding: "10px", marginTop: "10px" }}>Register</button>
+        </form>
+        <br></br>
+        <div>
+          <button onClick={moveToLogin} style={{ borderRadius: "25px", padding: "10px", marginTop: "10px" }}>Already have account</button>
+        </div>
+      </main>
     </>
   );
 };

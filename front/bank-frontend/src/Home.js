@@ -47,20 +47,24 @@ const Home = () => {
       navigate('/create_deposit')
     }
 
+    const allDeposits = () => {
+      navigate('/all_deposits')
+    }
+
     return (
       <>
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center', height:"50vh"}}>
-          <h2>Welcome</h2>
-        </div>
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-          <h3>{name} {surname}!</h3>
-        </div>
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-          <button onClick={leaveAccount}>Leave Account</button>
-        </div>
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-          <button onClick={createDeposit}>Create Deposit</button>
-        </div>
+        <header style={{ backgroundColor: 'green', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img src="logo.png" alt="Logo" style={{ height: '50px', marginRight: '20px' }} />
+          </div>
+          
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <h3 style={{ margin: '0 20px', color: 'white' }}>{name} {surname}</h3>
+            <button onClick={leaveAccount} style={{ margin: '0 10px' }}>Leave Account</button>
+            <button onClick={createDeposit} style={{ margin: '0 10px' }}>Create Deposit</button>
+            <button onClick={allDeposits}>All Deposits</button>
+          </div>
+        </header>
       </>
     );
 };
