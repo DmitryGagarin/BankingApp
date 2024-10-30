@@ -24,6 +24,7 @@ public class CreateDepositController {
         Deposit deposit = new Deposit(userId, type);
         currentUserId = userId;
         depositRepository.save(deposit);
+        System.out.println("CURRENT USER ID: " + currentUserId);
         return ResponseEntity.status(HttpStatus.OK).body("Deposit saved successfully");
     }
 }

@@ -4,6 +4,7 @@ import Registration from './Registration';
 import Login from './Login';
 import Home from './Home';
 import CreateDeposit from './CreateDeposit';
+import AllDeposits from './All_Deposits';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create_deposit" element={<CreateDeposit />} />
+        <Route path="/all_deposits" element={<AllDeposits />} />
       </Routes>
     </Router>
   );
