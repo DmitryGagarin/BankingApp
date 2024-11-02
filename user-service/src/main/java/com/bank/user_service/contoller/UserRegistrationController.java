@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserRegistrationController {
 
-    // подсунуть мок-объекты для тестирования
-    // кафку можно
-    // цепочка ответсвенности для редиса
     @Autowired
     public UserRepository userRepository;
 
@@ -38,25 +35,25 @@ public class UserRegistrationController {
                                                @PathVariable String password) {
 
         logger.info("User registration process started for {}", email);
+        logger.info("Checking whether user with this email is already registered");
+        logger.info("Result of .findByEmail(email): " + userRepository.findByEmail(email));
+        if (userRepository.findByEmail(email) != null) {
+            logger.warn("Registration attempt failed: email {} already exists", email);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User with this email already registered");
+        } else {
 
-//         Check if the email already exists
-//        if (userService.checkIfEmailExists(email)) {
-//            logger.warn("Registration attempt failed: email {} already exists", email);
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//                    .body("Email already exists.");
-//        }
-
-        // Create and save the new user
-        User user = new User(firstName, lastName, email, password);
-        try {
-            logger.info("Attempting to save new user: {}", email);
-            userRepository.save(user);
-            logger.info("User registered successfully: {}", email);
-            return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
-        } catch (Exception e) {
-            logger.error("User registration failed: {}", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Registration failed: " + e.getMessage());
+           logger.info("Creating new user");
+            User user = new User(firstName, lastName, email, password);
+            try {
+                logger.info("Attempting to save new user: {}", email);
+                userRepository.save(user);
+                logger.info("User registered successfully: {}", email);
+                return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
+            } catch (Exception e) {
+                logger.error("User registration failed: {}", e.getMessage());
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Registration failed: " + e.getMessage());
+            }
         }
     }
 }

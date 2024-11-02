@@ -8,13 +8,9 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public boolean checkIfEmailExists(String email) {
-        return userRepository.existsByEmail(email);
-    }
+//    public boolean checkIfEmailExists(String email) {
+//        return userRepository.existsByEmail(email);
+//    }
 }

@@ -1,10 +1,11 @@
 import React from 'react';
+import logo from './logo.jpeg'; 
 
 const Header = ({ name, surname, leaveAccount, goToHome, createDeposit, allDeposits }) => {
     return (
         <header style={{ backgroundColor: 'green', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 20px' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-                <img src="logo.png" alt="Logo" style={{ height: '50px', marginRight: '20px' }} />
+                <img src={logo} alt="Logo" style={{ height: '50px', marginRight: '20px' }} />
             </div>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <h3 style={{ margin: '0 20px', color: 'white' }}>{name} {surname}</h3>
@@ -16,5 +17,6 @@ const Header = ({ name, surname, leaveAccount, goToHome, createDeposit, allDepos
         </header>
     );
 };
+
 
 export default Header;

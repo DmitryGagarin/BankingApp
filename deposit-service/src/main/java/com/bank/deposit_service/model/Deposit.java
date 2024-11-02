@@ -1,9 +1,6 @@
 package com.bank.deposit_service.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,6 +30,7 @@ public class Deposit {
 
     @Id
     private UUID id;
+    @Enumerated(EnumType.STRING)
     private DepositType type;
     private String number;
     private String cvv;
@@ -74,7 +72,7 @@ public class Deposit {
         this.type = DepositType.DEBIT_CARD;
         this.number = CardNumberGenerator();
         this.cvv = CVVGenerator();
-        this.amount = null;
+        this.amount = BigDecimal.valueOf(0);
         this.userId = userId;
         this.createDate = LocalDateTime.now();
     }

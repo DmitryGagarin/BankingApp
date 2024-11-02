@@ -35,40 +35,34 @@ const Registration = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Registration Successful', formData);
-      fetch(`http://localhost:8081/register/${formData.firstName}/${formData.lastName}/${formData.email}/${formData.password}`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
+        console.log('Registration Successful', formData);
+        fetch(`http://localhost:8081/register/${formData.firstName}/${formData.lastName}/${formData.email}/${formData.password}`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
         .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.text();
+            if (!response.ok) {
+                return response.text().then(text => {
+                    throw new Error(text); // Use the response text as the error message
+                });
+            }
+            return response.text();
         })
         .then(text => {
-          console.log('Response text:', text); // Log the raw response text
-          try {
-            const data = JSON.parse(text);
-            alert("everything ok");
-            console.log('Registration Successful:', data);
-          } catch (parseError) {
-            console.log('Received plain text response:', text);
-            alert(text); // Alert the plain text message
-          }
-          // Navigate after successful registration
-          navigate('/login');
+            console.log('Response text:', text);
+            alert(text); // Show success message
+            navigate('/login'); // Navigate after successful registration
         })
         .catch((error) => {
-          console.error('Error during registration:', error);
-          alert("No connection to backend");
+            console.error('Error during registration:', error);
+            alert(error.message); // Show the error message from the backend
         });
     }
-  };
+};
+
 
   const moveToLogin = () => {
     navigate("/login");
