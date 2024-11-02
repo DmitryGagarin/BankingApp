@@ -1,3 +1,14 @@
+да, понимаю, что еврика, пг и рэбит в идеале должны работать в отдельных контейнерах, а не в одном большом, но для ощущения жесткого кодинга сделал так
+
+for pg admin:
+General tab: Postgres
+Connection tab:
+	host: postgres
+	port: 5432
+	maintainance: postgres
+	username: 5432
+	password: qrrqrr
+
 port 8761 - eureka
 
 port 8082 - user-service (in docker)

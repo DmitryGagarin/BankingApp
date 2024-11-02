@@ -11,6 +11,27 @@ services: # abstract definition of a computing resource within an application
     ports: # define ports on which service will work
       - "5433:5432" # 5433 is port system, 5432 port for container
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672 # client port
+      - 15672:15672 # management UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  eureka-server:
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRATIONS=false
+
+
   user-service: # Spring backend service (this is a name of container)
     build:
       context: ./user-service
@@ -24,6 +45,7 @@ services: # abstract definition of a computing resource within an application
       - "8081:8081"
     depends_on:
       - postgres
+      - eureka-server
 
   deposit-service:
     build:
@@ -38,7 +60,7 @@ services: # abstract definition of a computing resource within an application
       - "8083:8083"
     depends_on:
       - postgres
-    
+      - eureka-server
 
   frontend:  # React frontend service (name of container)
     build: # specifies the way of building
@@ -49,3 +71,21 @@ services: # abstract definition of a computing resource within an application
       - "3000:80"  # Assuming nginx is serving on port 80
     environment:
       - REACT_APP_API_URL=http://backend:8081  # Use backend service name
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8085:80"
+    depends_on:
+      - postgres
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  rabbitmq_data:
+  pgadmin_data:
