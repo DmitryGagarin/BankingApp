@@ -41,6 +41,10 @@ const Home = () => {
     const allDeposits = () => {
         navigate('/all_deposits');
     };
+    
+    const topUpDeposit = () => {
+        navigate('/top_up_deposit');
+    }
 
     return (
         <>
@@ -51,6 +55,7 @@ const Home = () => {
                 goToHome={goToHome}
                 createDeposit={createDeposit} 
                 allDeposits={allDeposits} 
+                topUpDeposit={topUpDeposit}
             />
             {/* Additional content for Home can go here */}
         </>

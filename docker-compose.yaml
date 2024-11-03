@@ -10,6 +10,14 @@ services: # abstract definition of a computing resource within an application
       POSTGRES_PASSWORD: qrrqrr # password
     ports: # define ports on which service will work
       - "5433:5432" # 5433 is port system, 5432 port for container
+ 
+  redis:
+    image: "redis"
+    ports:
+      - "6379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB, FLUSHALL  
 
   rabbitmq:
     image: rabbitmq:3-management
